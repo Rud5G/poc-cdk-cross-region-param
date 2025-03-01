@@ -49,23 +49,26 @@ jobs:
         with:
           node-version: lts/iron
 
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v2
+
       - run: |
           npm install
           npm install -g aws-cdk
           npm install -g cdk-dia
 
-      - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v2
-
       - name: create diagram app stack
         run: |
-          rm -rf ./cdk.out/
-          npx cdk synth
-          npx cdk-dia --target docs/images/app.png
+          mkdir -p docs/images
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/images/waf.png
-          git commit -n --allow-empty -a -m "Add app diagram"
+          rm -rf ./cdk.out/
+          npx cdk synth param-stack-eu-west-1
+          npx cdk-dia --target docs/images/param-stack-eu-west-1.png
+          rm -rf ./cdk.out/
+          npx cdk synth param-stack-us-east-1
+          npx cdk-dia --target docs/images/param-stack-us-east-1.png
+          git commit -n --allow-empty -a -m "Add stack diagrams"
 
       - name: Push changes
         uses: ad-m/github-push-action@master
