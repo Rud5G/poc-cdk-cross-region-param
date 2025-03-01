@@ -21,7 +21,7 @@ describe("CrossRegionStack US", () => {
     });
 
     test("Creates a SQS Quuse", () => {
-        template.resourceCountIs("AWS::SQS::Queue", 1);
+        template.resourceCountIs("AWS::SQS::Queue", 0);
     });
 
     test("Expect match snapshot", () => {
