@@ -9,3 +9,6 @@ cdk.out
 
 # IDE
 /.idea/
+
+/diagram.dot
+/diagram.png
