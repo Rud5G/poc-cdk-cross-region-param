@@ -60,7 +60,7 @@ jobs:
       - name: create diagram app stack
         run: |
           rm -rf ./cdk.out/
-          npx cdk synth
+          npx cdk synth param-stack-eu-west-1 param-stack-us-east-1
           npx cdk-dia --target docs/images/app.png
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
