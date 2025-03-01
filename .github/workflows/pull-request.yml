@@ -65,9 +65,11 @@ jobs:
           rm -rf ./cdk.out/
           npx cdk synth param-stack-eu-west-1
           npx cdk-dia --target docs/images/param-stack-eu-west-1.png
+          git add docs/images/param-stack-eu-west-1.png
           rm -rf ./cdk.out/
           npx cdk synth param-stack-us-east-1
           npx cdk-dia --target docs/images/param-stack-us-east-1.png
+          git add docs/images/param-stack-us-east-1.png
           git commit -n --allow-empty -a -m "Add stack diagrams"
 
       - name: Push changes

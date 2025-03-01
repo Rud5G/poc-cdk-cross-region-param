@@ -10,5 +10,8 @@
 * `npx cdk synth`   emits the synthesized CloudFormation template
 * `npx cdk deploy`  deploy two stacks to your default AWS account and two regions: `eu-west-1` & `us-east-1`
 
-![image](./docs/images/app.png)
+![param-stack-us-east-1](./docs/images/param-stack-us-east-1.png)
+
+
+![param-stack-eu-west-1.png](./docs/images/param-stack-eu-west-1.png)
 
