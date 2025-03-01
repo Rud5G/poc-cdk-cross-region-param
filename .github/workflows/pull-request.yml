@@ -1,0 +1,75 @@
+name: Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/images/**'
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+jobs:
+  test-suite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "setup node"
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      - name: "install aws-cdk"
+        run: npm install -g aws-cdk
+
+      - name: "install dependencies"
+        run: npm install
+
+      - name: "run tests"
+        run: npm run test
+
+  diagram:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Setup NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/iron
+
+      - run: |
+          npm install
+          npm install -g aws-cdk
+          npm install -g cdk-dia
+
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v2
+
+      - name: create diagram app stack
+        run: |
+          rm -rf ./cdk.out/
+          npx cdk synth
+          npx cdk-dia --target docs/images/app.png
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/images/waf.png
+          git commit -n --allow-empty -a -m "Add app diagram"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.head_ref }}
+
