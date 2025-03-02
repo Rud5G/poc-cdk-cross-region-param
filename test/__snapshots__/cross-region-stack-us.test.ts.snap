@@ -9,6 +9,11 @@ exports[`CrossRegionStack US Expect match snapshot 1`] = `
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
+  "Resources": {
+    "MyResourceuseast1": {
+      "Type": "Custom::MyResource",
+    },
+  },
   "Rules": {
     "CheckBootstrapVersion": {
       "Assertions": [
