@@ -57,17 +57,15 @@ jobs:
           npm install -g aws-cdk
           npm install -g cdk-dia
 
-      - name: create diagram app stack
+      - name: create diagrams stack param-stack-eu-west-1 & param-stack-us-east-1
         run: |
           mkdir -p docs/images
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # param-stack-eu-west-1
           rm -rf ./cdk.out/
           npx cdk synth param-stack-eu-west-1
           npx cdk-dia --target docs/images/param-stack-eu-west-1.png
           git add docs/images/param-stack-eu-west-1.png
-          # param-stack-us-east-1
           rm -rf ./cdk.out/
           npx cdk synth param-stack-us-east-1
           npx cdk-dia --target docs/images/param-stack-us-east-1.png
