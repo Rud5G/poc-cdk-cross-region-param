@@ -112,8 +112,11 @@ exports[`CrossRegionStack param Expect match snapshot for templateEU: templateEU
         },
         "WriterProps": {
           "exports": {
-            "/cdk/exports/param-stack-us-east-1/paramstackeuwest1RefMyResource6073B41F0F3C838C": {
-              "Ref": "MyResource6073B41F",
+            "/cdk/exports/param-stack-us-east-1/paramstackeuwest1FnGetAttMyResourceeuwest1arn15AA34DF": {
+              "Fn::GetAtt": [
+                "MyResourceeuwest1",
+                "arn",
+              ],
             },
           },
           "region": "us-east-1",
@@ -122,8 +125,8 @@ exports[`CrossRegionStack param Expect match snapshot for templateEU: templateEU
       "Type": "Custom::CrossRegionExportWriter",
       "UpdateReplacePolicy": "Delete",
     },
-    "MyResource6073B41F": {
-      "Type": "My::Resource",
+    "MyResourceeuwest1": {
+      "Type": "Custom::MyResource",
     },
   },
   "Rules": {
@@ -158,16 +161,6 @@ exports[`CrossRegionStack param Expect match snapshot for templateEU: templateEU
 
 exports[`CrossRegionStack param Expect match snapshot for templateUS: templateUS 1`] = `
 {
-  "Outputs": {
-    "Output": {
-      "Value": {
-        "Fn::GetAtt": [
-          "ExportsReader8B249524",
-          "/cdk/exports/param-stack-us-east-1/paramstackeuwest1RefMyResource6073B41F0F3C838C",
-        ],
-      },
-    },
-  },
   "Parameters": {
     "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
@@ -261,7 +254,7 @@ exports[`CrossRegionStack param Expect match snapshot for templateUS: templateUS
       "Properties": {
         "ReaderProps": {
           "imports": {
-            "/cdk/exports/param-stack-us-east-1/paramstackeuwest1RefMyResource6073B41F0F3C838C": "{{resolve:ssm:/cdk/exports/param-stack-us-east-1/paramstackeuwest1RefMyResource6073B41F0F3C838C}}",
+            "/cdk/exports/param-stack-us-east-1/paramstackeuwest1FnGetAttMyResourceeuwest1arn15AA34DF": "{{resolve:ssm:/cdk/exports/param-stack-us-east-1/paramstackeuwest1FnGetAttMyResourceeuwest1arn15AA34DF}}",
           },
           "prefix": "param-stack-us-east-1",
           "region": "us-east-1",
@@ -275,6 +268,17 @@ exports[`CrossRegionStack param Expect match snapshot for templateUS: templateUS
       },
       "Type": "Custom::CrossRegionExportReader",
       "UpdateReplacePolicy": "Delete",
+    },
+    "MyResourceuseast1": {
+      "Properties": {
+        "Prop": {
+          "Fn::GetAtt": [
+            "ExportsReader8B249524",
+            "/cdk/exports/param-stack-us-east-1/paramstackeuwest1FnGetAttMyResourceeuwest1arn15AA34DF",
+          ],
+        },
+      },
+      "Type": "Custom::MyResource",
     },
   },
   "Rules": {

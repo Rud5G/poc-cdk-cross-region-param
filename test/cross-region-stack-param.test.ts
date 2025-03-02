@@ -27,12 +27,13 @@ describe("CrossRegionStack param", () => {
                 region: regionUS,
             },
             crossRegionReferences: true,
+            crArn: stackEU.customResource.getAtt('arn')
         });
 
-        const myResource = new MyResource(stackEU, 'MyResource');
-        new cdk.CfnOutput(stackUS, 'Output', {
-            value: myResource.name,
-        });
+        // const myResource = new MyResource(stackEU, 'MyResource');
+        // new cdk.CfnOutput(stackUS, 'Output', {
+        //     value: myResource.name,
+        // });
 
         templateEU = Template.fromStack(stackEU);
         templateUS = Template.fromStack(stackUS);
