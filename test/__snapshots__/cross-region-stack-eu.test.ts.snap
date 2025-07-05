@@ -18,6 +18,9 @@ exports[`CrossRegionStack EU Expect match snapshot 1`] = `
       "Type": "AWS::SQS::Queue",
       "UpdateReplacePolicy": "Delete",
     },
+    "MyResourceeuwest1": {
+      "Type": "Custom::MyResource",
+    },
   },
   "Rules": {
     "CheckBootstrapVersion": {

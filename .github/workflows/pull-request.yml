@@ -57,7 +57,7 @@ jobs:
           npm install -g aws-cdk
           npm install -g cdk-dia
 
-      - name: create diagram app stack
+      - name: create diagrams stack param-stack-eu-west-1 & param-stack-us-east-1
         run: |
           mkdir -p docs/images
           git config --global user.name "github-actions[bot]"
